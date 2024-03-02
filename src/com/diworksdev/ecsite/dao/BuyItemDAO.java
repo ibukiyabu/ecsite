@@ -4,41 +4,28 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import com.diworksdev.ecsite.dto.LoginDTO;
+import com.diworksdev.ecsite.dto.BuyItemDTO;
 import com.diworksdev.ecsite.util.DBConnector;
 
 public class BuyItemDAO {
+    private DBConnector dbConnector = new DBConnector();
+    private Connection connection = dbConnector.getConnection();
+    private BuyItemDTO buyItemDTO = new BuyItemDTO();
 
-	private DBConnector dbConnector = new DBConnector();
-	private Connection connection = dbConnector.getConnection();
-	private LoginDTO loginDTO = new LoginDTO();
+    public BuyItemDTO getBuyItemInfo() {
+        String sql = "SELECT id, item_name, item_price FROM item_info_transaction";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-	public LoginDTO getLoginUserInfo(String loginUserId, String loginPassword) {
-
-		String sql = "SELECT * FROM login_user_transaction where login_id=? AND login_pass=?";
-
-		try {
-			PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
-			preparedStatement.setString(1, loginUserId);
-			preparedStatement.setString(2, loginPassword);
-
-			ResultSet resultSet = preparedStatement.executeQuery();
-
-			if (resultSet.next()) {
-				loginDTO.setLoginId(resultSet.getString("login_id"));
-				loginDTO.setLoginPassword(resultSet.getString("login_pass"));
-				loginDTO.setUserName(resultSet.getString("user_name"));
-
-				if (resultSet.getString("login_id") != null) {
-					loginDTO.setLoginFlg(true);
-				}
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return loginDTO;
-	}
-
+            if(resultSet.next()) {
+                buyItemDTO.setId(resultSet.getInt("id"));
+                buyItemDTO.setItemName(resultSet.getString("item_name"));
+                buyItemDTO.setItemPrice(resultSet.getString("item_price"));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return buyItemDTO;
+    }
 }
