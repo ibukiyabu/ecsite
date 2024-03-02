@@ -2,14 +2,14 @@ package com.diworksdev.ecsite.dto;
 
 public class BuyItemDTO {
 	
-	public String id;
+	public int id;
 	public String itemName;
 	public String itemPrice;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getItemName() {
