@@ -78,7 +78,7 @@ table {
 					
 					<tr id="box">
 					<td><label>ユーザー名:</label></td>
-					<td><s:property value="username" escape="false"/></td>
+					<td><s:property value="userName" escape="false"/></td>
 					</tr>
 					
 					<tr>
