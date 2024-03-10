@@ -97,7 +97,7 @@ table {
 					</tr>
 
 					<tr>
-						<td><s:submit value="購入"></s:submit></td>
+						<td><s:submit value="購入"/></td>
 					</tr>
 				</table>
 			</s:form>
